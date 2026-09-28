@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2f5f60">
+  <title>Uncolordle</title>
+  <link rel="icon" href="favicon.ico">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="header">
+      <h1>Uncolordle</h1>
+      <p class="subtitle">
+        Enter the color name and similarity you received from
+        <a href="https://colordle.ryantanen.com/" target="_blank" rel="noreferrer">Colordle</a>.
+        The solver estimates the hidden RGB value and suggests the closest unguessed named color.
+      </p>
+    </header>
+
+    <section class="solver-card">
+      <div class="card-title-row">
+        <div>
+          <h2>Next suggestion</h2>
+          <p class="muted">Use the suggested color as your next guess in the original game.</p>
+        </div>
+        <button id="reset-game" class="secondary-button" type="button">Reset</button>
+      </div>
+
+      <div id="suggestion-panel" class="suggestion" hidden>
+        <div id="suggestion-swatch" class="suggestion-swatch" aria-label="Suggested color"></div>
+        <div class="suggestion-copy">
+          <div class="suggestion-label">Suggested color</div>
+          <div id="suggestion-name" class="suggestion-name">—</div>
+          <div id="suggestion-hex" class="suggestion-hex">—</div>
+        </div>
+      </div>
+
+      <div class="input-grid">
+        <label class="field">
+          <span>Color name</span>
+          <input id="color-name" list="name-hints" type="text" placeholder="e.g. Sun Crete" autocomplete="off" spellcheck="false">
+          <small>Not case sensitive</small>
+          <datalist id="name-hints"></datalist>
+        </label>
+
+        <label class="field">
+          <span>Similarity</span>
+          <div class="percent-input">
+            <input id="similarity" type="text" min="0" max="100" step="0.01" placeholder="e.g. 95.79" autocomplete="off" required>
+            <span>%</span>
+          </div>
+          <small>Enter the percentage shown by the game</small>
+        </label>
+      </div>
+
+      <button id="submit-guess" class="primary-button" type="button" disabled>Add guess</button>
+      <div id="status" class="status" role="status" aria-live="polite">
+        <span id="status-text">Loading color database…</span>
+        <span id="data-count" class="data-count"></span>
+      </div>
+    </section>
+
+    <section class="history-card">
+      <div class="card-title-row">
+        <div>
+          <h2>Your guesses</h2>
+          <p class="muted">Newest guesses appear first.</p>
+        </div>
+      </div>
+
+      <div id="empty-history" class="empty-state">
+        Enter your first guess above to start the solver.
+      </div>
+      <div id="history" class="history"></div>
+    </section>
+
+    <footer class="footer">
+      <span>Color data from <a href="https://github.com/meodai/color-names" target="_blank" rel="noreferrer">meodai/color-names</a>.</span>
+      <span>Your guesses are stored locally in this browser.</span>
+      <span>&copy; Russell Saerang 2026</span>
+    </footer>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
